@@ -1,5 +1,7 @@
 import model.dto.EmployeeDTO;
+import utils.Mapper;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +22,44 @@ public class App {
     private static List<EmployeeDTO> employeeDTOList = new ArrayList<>();
 
 
-    public static void main(String[] args) {
-        App.run();
+    public static void main(String[] args) throws IOException {
+        FileReader fileReader = new FileReader("D:\\Study\\EMS\\employee_list.csv");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        List<EmployeeDTO> oldEmployees = new ArrayList<>();
+
+        // читаем файл по строчно
+        for (String line = ""; line != null; line = bufferedReader.readLine()) {
+            // разбиваем строку на массив
+            String[] stringArray = line.split(","); // бьем по запятой
+            try {
+                // преобразуем массив в объект EmployeeDTO
+                EmployeeDTO employeeDTO = Mapper.toEmployeeDTO(stringArray);
+                // берем людей пенсионного возраста
+                if (employeeDTO.getAge() > 62) {
+                    oldEmployees.add(employeeDTO);
+                }
+            } catch (Exception e) { }
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        // готовим общий текст добавляя данные по сотрудникам в формате CSV (comma-separated values)
+        for (EmployeeDTO employeeDTO : oldEmployees) {
+            stringBuilder.append(employeeDTO.getId())
+                    .append(",")
+                    .append(employeeDTO.getName())
+                    .append(",")
+                    .append(employeeDTO.getDepartmentName())
+                    .append(",")
+                    .append(employeeDTO.getAge())
+                    .append("\n");
+        }
+
+        // записываем в файл
+        FileWriter fileWriter = new FileWriter("C:\\Users\\tomi\\Desktop\\employees.txt");
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(stringBuilder.toString());
+        bufferedWriter.flush();
+        bufferedWriter.close();
     }
 
     private static void run() {
