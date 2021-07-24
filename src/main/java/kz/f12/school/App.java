@@ -1,5 +1,11 @@
-import model.dto.EmployeeDTO;
-import utils.Mapper;
+package kz.f12.school;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import kz.f12.school.model.dto.EmployeeDTO;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class App {
+public class App extends Application {
 
     private static final int CREATE = 1;
     private static final int GET_BY_NAME = 2;
@@ -22,44 +28,19 @@ public class App {
     private static List<EmployeeDTO> employeeDTOList = new ArrayList<>();
 
 
-    public static void main(String[] args) throws IOException {
-        FileReader fileReader = new FileReader("D:\\Study\\EMS\\employee_list.csv");
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        List<EmployeeDTO> oldEmployees = new ArrayList<>();
+    public static void main(String[] args) {
+        launch(App.class, args);
+    }
 
-        // читаем файл по строчно
-        for (String line = ""; line != null; line = bufferedReader.readLine()) {
-            // разбиваем строку на массив
-            String[] stringArray = line.split(","); // бьем по запятой
-            try {
-                // преобразуем массив в объект EmployeeDTO
-                EmployeeDTO employeeDTO = Mapper.toEmployeeDTO(stringArray);
-                // берем людей пенсионного возраста
-                if (employeeDTO.getAge() > 62) {
-                    oldEmployees.add(employeeDTO);
-                }
-            } catch (Exception e) { }
-        }
-
-        StringBuilder stringBuilder = new StringBuilder();
-        // готовим общий текст добавляя данные по сотрудникам в формате CSV (comma-separated values)
-        for (EmployeeDTO employeeDTO : oldEmployees) {
-            stringBuilder.append(employeeDTO.getId())
-                    .append(",")
-                    .append(employeeDTO.getName())
-                    .append(",")
-                    .append(employeeDTO.getDepartmentName())
-                    .append(",")
-                    .append(employeeDTO.getAge())
-                    .append("\n");
-        }
-
-        // записываем в файл
-        FileWriter fileWriter = new FileWriter("C:\\Users\\tomi\\Desktop\\employees.txt");
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(stringBuilder.toString());
-        bufferedWriter.flush();
-        bufferedWriter.close();
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(App.class.getResource("/templates/main.fxml"));
+        primaryStage.setTitle("EMS - Employee Management System");
+        Scene scene = new Scene(root, 600, 400);
+        // scene.getStylesheets().add()
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
     private static void run() {

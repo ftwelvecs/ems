@@ -1,4 +1,4 @@
-package model.dto;
+package kz.f12.school.model.dto;
 
 public class EmployeeDTO {
     private int id;
