@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.f12.school.controller.EmployeeController">
+   <children>
+      <TableView fx:id="empTableView" layoutX="133.0" layoutY="120.0" prefHeight="205.0" prefWidth="334.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="44.0" text="#" />
+          <TableColumn fx:id="nameColumn" prefWidth="115.99993896484375" text="имя" />
+            <TableColumn fx:id="depNameColumn" prefWidth="96.00006103515625" text="департамент" />
+            <TableColumn fx:id="ageColumn" prefWidth="77.5999755859375" text="возраст" />
+        </columns>
+      </TableView>
+      <TextField fx:id="searchTextField" layoutX="183.0" layoutY="76.0" prefHeight="25.0" prefWidth="284.0" />
+      <Label layoutX="133.0" layoutY="78.0" prefHeight="17.0" prefWidth="47.0" text="Поиск:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

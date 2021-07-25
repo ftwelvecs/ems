@@ -22,6 +22,9 @@ public class MainController extends AbstractController {
         addButton.setOnAction(event -> {
             openNewWindow("/templates/add.fxml");
         });
+        searchButton.setOnAction(event -> {
+            openNewWindow("/templates/employee.fxml");
+        });
     }
 
 }

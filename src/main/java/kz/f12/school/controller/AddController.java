@@ -32,9 +32,12 @@ public class AddController extends AbstractController {
                 int age = Integer.parseInt(empAge);
 
                 if (!empName.equals("") && !empDepName.equals("") && (age > 0 && age < 150)) {
-                    /*EmployeeDTO employeeDTO = new EmployeeDTO();
+                    EmployeeDTO employeeDTO = new EmployeeDTO();
                     employeeDTO.setName(empName);
-                    repository.add(employeeDTO);*/
+                    employeeDTO.setDepartmentName(empDepName);
+                    employeeDTO.setAge(age);
+                    repository.add(employeeDTO);
+                    addEmpButton.getScene().getWindow().hide();
                 }
 
             } catch (Exception e) {
