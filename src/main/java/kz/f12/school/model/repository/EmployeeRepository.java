@@ -30,9 +30,14 @@ public class EmployeeRepository {
         employeeDTOList.add(employeeDTO);
     }
 
+    public void delete(EmployeeDTO employeeDTO) {
+        employeeDTOList.remove(employeeDTO);
+    }
+
     private void loadData() {
-        JSONTokener tokener = new JSONTokener(getClass().getResourceAsStream("/employee_list.json"));
         try {
+            String path = System.getenv("APPDATA") + "/employee_list.json";
+            JSONTokener tokener = new JSONTokener(path);
             JSONArray jsonArray = (JSONArray) tokener.nextValue();
             for (Object obj : jsonArray) {
                 JSONObject jsonObject = (JSONObject) obj;
