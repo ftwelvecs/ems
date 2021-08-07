@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class EmployeeRepository {
     private void loadData() {
         try {
             String path = System.getenv("APPDATA") + "/employee_list.json";
-            JSONTokener tokener = new JSONTokener(path);
+            JSONTokener tokener = new JSONTokener(new FileReader(path));
             JSONArray jsonArray = (JSONArray) tokener.nextValue();
             for (Object obj : jsonArray) {
                 JSONObject jsonObject = (JSONObject) obj;
