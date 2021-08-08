@@ -1,7 +1,12 @@
 package kz.f12.school.utils;
 
 import kz.f12.school.model.dto.EmployeeDTO;
+import kz.f12.school.model.dto.UserDTO;
 import org.json.JSONObject;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 
 public class Mapper {
 
@@ -23,4 +28,27 @@ public class Mapper {
         return employeeDTO;
     }
 
+    public static UserDTO toUserDTO(ResultSet resultSet) {
+        UserDTO userDTO = new UserDTO();
+        try {
+            Integer id = resultSet.getInt("id");
+            String username = resultSet.getString("username");
+            String firstName = resultSet.getString("first_name");
+            String email = resultSet.getString("email");
+            String isActive = resultSet.getString("is_active");
+            Date createDate = resultSet.getDate("create_date");
+            Date lastUpdateDate = resultSet.getDate("last_update_date");
+
+            userDTO.setId(id);
+            userDTO.setUsername(username);
+            userDTO.setFirstName(firstName);
+            userDTO.setEmail(email);
+            userDTO.setIsActive(isActive.charAt(0));
+            userDTO.setCreateDate(createDate);
+            userDTO.setLastUpdateDate(lastUpdateDate);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return userDTO;
+    }
 }
