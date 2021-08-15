@@ -16,7 +16,7 @@ public class App extends Application {
     private EmployeeRepository employeeRepository = EmployeeRepository.getInstance();
 
     public static void main(String[] args) {
-        // launch(App.class, args);
+        launch(App.class, args);
     }
 
     @Override

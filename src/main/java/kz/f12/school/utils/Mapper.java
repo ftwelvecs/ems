@@ -1,7 +1,6 @@
 package kz.f12.school.utils;
 
-import kz.f12.school.model.dto.EmployeeDTO;
-import kz.f12.school.model.dto.UserDTO;
+import kz.f12.school.model.dto.*;
 import org.json.JSONObject;
 
 import java.sql.ResultSet;
@@ -28,6 +27,27 @@ public class Mapper {
         return employeeDTO;
     }
 
+    public static AbstractDTO map(ResultSet resultSet, String type) {
+        AbstractDTO result = null;
+        switch (type) {
+            case "users":
+                result = toUserDTO(resultSet);
+                break;
+            case "addresses":
+                result = toAddressDTO(resultSet);
+                break;
+            case "departments":
+                result = toDepartmentDTO(resultSet);
+                break;
+            case "regions":
+                result = toRegionDTO(resultSet);
+                break;
+            case "positions":
+                result = toPositionDTO(resultSet);
+        }
+        return result;
+    }
+
     public static UserDTO toUserDTO(ResultSet resultSet) {
         UserDTO userDTO = new UserDTO();
         try {
@@ -51,4 +71,53 @@ public class Mapper {
         }
         return userDTO;
     }
+
+    public static AddressDTO toAddressDTO(ResultSet resultSet) {
+        AddressDTO addressDTO = new AddressDTO();
+        try {
+            Integer id = resultSet.getInt("id");
+            String city = resultSet.getString("city");
+            String address = resultSet.getString("address");
+            Date createDate = resultSet.getDate("create_date");
+            Date lastUpdateDate = resultSet.getDate("last_update_date");
+
+            addressDTO.setId(id);
+            addressDTO.setCity(city);
+            addressDTO.setAddress(address);
+            addressDTO.setCreateDate(createDate);
+            addressDTO.setLastUpdateDate(lastUpdateDate);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return addressDTO;
+    }
+
+    public static DepartmentDTO toDepartmentDTO(ResultSet resultSet) {
+        return (DepartmentDTO) toDictDTO(resultSet, new DepartmentDTO());
+    }
+
+    public static RegionDTO toRegionDTO(ResultSet resultSet) {
+        return (RegionDTO) toDictDTO(resultSet, new RegionDTO());
+    }
+
+    public static PositionDTO toPositionDTO(ResultSet resultSet) {
+        return (PositionDTO) toDictDTO(resultSet, new PositionDTO());
+    }
+
+    private static DictDTO toDictDTO(ResultSet resultSet, DictDTO dictDTO) {
+        try {
+            Integer id = resultSet.getInt("id");
+            String name = resultSet.getString("name");
+            Date createDate = resultSet.getDate("create_date");
+            Date lastUpdateDate = resultSet.getDate("last_update_date");
+            dictDTO.setId(id);
+            dictDTO.setName(name);
+            dictDTO.setCreateDate(createDate);
+            dictDTO.setLastUpdateDate(lastUpdateDate);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return dictDTO;
+    }
+
 }

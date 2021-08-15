@@ -31,12 +31,10 @@ public class AppTest {
             Statement statement = connection.createStatement();
 
             // #4 вызываем запрос
-            // statement.execute("insert into main.users(username, password, first_name, email, last_update) values('moderator', 'moderator', 'moderator', 'moderator@moderator.com', current_timestamp)");
+            statement.execute("insert into main.users(username, password, first_name, email, last_update_date) values('moderator', 'moderator', 'moderator', 'moderator@moderator.com', current_timestamp)");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-        System.exit(0);
     }
 }
