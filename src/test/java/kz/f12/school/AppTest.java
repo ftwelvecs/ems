@@ -18,7 +18,7 @@ public class AppTest {
         // Driver, DriverManager, Connection, Statement, ResultSet
 
         // #1 регистрируем driver
-        try {
+        /*try {
             Class.forName("java.sql.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -35,6 +35,6 @@ public class AppTest {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }*/
     }
 }

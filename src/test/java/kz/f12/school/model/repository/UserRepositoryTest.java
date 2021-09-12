@@ -12,15 +12,15 @@ public class UserRepositoryTest {
 
     @Test
     public void testGetAllUsers() {
-       DepartmentRepository departmentRepository = new DepartmentRepository();
+       /*DepartmentRepository departmentRepository = new DepartmentRepository();
        List<DepartmentDTO> list = departmentRepository.getAll();
-        System.out.println(list);
+        System.out.println(list);*/
     }
 
     @Test
     public void testFindById() {
-        UserRepository userRepository = new UserRepository();
+        /*UserRepository userRepository = new UserRepository();
         UserDTO userDTO = userRepository.findById(17);
-        System.out.println(userDTO);
+        System.out.println(userDTO);*/
     }
 }
