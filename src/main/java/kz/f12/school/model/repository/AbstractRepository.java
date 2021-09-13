@@ -15,14 +15,6 @@ public abstract class AbstractRepository<T extends AbstractDTO> {
 
     private static Connection connection;
 
-    public AbstractRepository() {
-        try {
-            Class.forName("java.sql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Connection getConnection() {
         if (connection == null) {
             try {
