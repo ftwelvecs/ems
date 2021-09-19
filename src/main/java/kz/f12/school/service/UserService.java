@@ -13,6 +13,10 @@ public class UserService {
         return repository.findById(userId);
     }
 
+    public void create(UserDTO userDTO) {
+        // метод-заглушка, реализацию напишем на следующем уроке
+    }
+
     public List<UserDTO> getAll() {
         return repository.getAll();
     }

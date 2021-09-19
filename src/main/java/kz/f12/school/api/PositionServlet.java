@@ -1,7 +1,7 @@
 package kz.f12.school.api;
 
-import kz.f12.school.model.dto.UserDTO;
-import kz.f12.school.service.UserService;
+import kz.f12.school.model.dto.PositionDTO;
+import kz.f12.school.service.PositionService;
 import kz.f12.school.utils.Mapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,15 +16,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-// * - означает любое значение
-// примеры: "/user/test", "/user/test/43", "/user" и т.д.
-@WebServlet("/user/*")
-public class UserServlet extends HttpServlet {
+@WebServlet("/position/*")
+public class PositionServlet extends HttpServlet {
 
-    private UserService userService = new UserService();
+    private PositionService positionService = new PositionService();
 
     @Override
-    // TODO: продебажить метод несколько раз (минимум 10)
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Берем путь URL в качестве строки
         String path = req.getPathInfo();
@@ -36,9 +33,9 @@ public class UserServlet extends HttpServlet {
 
             // определяем в соответствии с именем пути дальнейшую логику действии
             if ("findById".equals(params[1])) { // ищем по конкретному id
-                int userId = Integer.parseInt(params[2]);
-                UserDTO userDTO = userService.findById(userId);
-                JSONObject jsonObject = new JSONObject(userDTO);
+                int positionId = Integer.parseInt(params[2]);
+                PositionDTO positionDTO = positionService.findById(positionId);
+                JSONObject jsonObject = new JSONObject(positionDTO);
 
                 // указываем возвращаемый тип как json
                 resp.setContentType("application/json");
@@ -47,8 +44,8 @@ public class UserServlet extends HttpServlet {
                 printWriter.write(jsonObject.toString());
                 printWriter.flush();
             } else if ("getAll".equals(params[1])) { // берем всех
-                List<UserDTO> userDTOList = userService.getAll();
-                JSONArray jsonArray = new JSONArray(userDTOList);
+                List<PositionDTO> positionDTOList = positionService.getAll();
+                JSONArray jsonArray = new JSONArray(positionDTOList);
 
                 // указываем возвращаемый тип как json
                 resp.setContentType("application/json");
@@ -83,8 +80,9 @@ public class UserServlet extends HttpServlet {
 
                 JSONObject jsonObject = new JSONObject(body);
 
-                UserDTO userDTO = Mapper.toUserDTO(jsonObject);
-                userService.create(userDTO);
+                PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
+                // TODO: создать метод-заглушку в PositionService
+                // positionService.create(positionDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -112,9 +110,9 @@ public class UserServlet extends HttpServlet {
 
                 JSONObject jsonObject = new JSONObject(body);
 
-                UserDTO userDTO = Mapper.toUserDTO(jsonObject);
-                // TODO: создать метод-заглушку в UserService
-                // userService.update(userDTO);
+                PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
+                // TODO: создать метод-заглушку в PositionService
+                // positionService.update(positionDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -142,9 +140,9 @@ public class UserServlet extends HttpServlet {
 
                 JSONObject jsonObject = new JSONObject(body);
 
-                UserDTO userDTO = Mapper.toUserDTO(jsonObject);
-                // TODO: создать метод-заглушку в UserService
-                // userService.delete(userDTO);
+                PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
+                // TODO: создать метод-заглушку в PositionService
+                // positionService.delete(positionDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -159,7 +157,7 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("text/html");
 
         PrintWriter printWriter = resp.getWriter();
-        printWriter.write("<h1>Hello from UserServlet</h1>");
+        printWriter.write("<h1>Hello from PositionServlet</h1>");
         printWriter.flush();
     }
 }

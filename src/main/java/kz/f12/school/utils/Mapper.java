@@ -72,6 +72,11 @@ public class Mapper {
         return userDTO;
     }
 
+    public static UserDTO toUserDTO(JSONObject jsonObject) {
+        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа UserDTO
+        return null;
+    }
+
     public static AddressDTO toAddressDTO(ResultSet resultSet) {
         AddressDTO addressDTO = new AddressDTO();
         try {
@@ -92,16 +97,36 @@ public class Mapper {
         return addressDTO;
     }
 
+    public static AddressDTO toAddressDTO(JSONObject jsonObject) {
+        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа AddressDTO
+        return null;
+    }
+
     public static DepartmentDTO toDepartmentDTO(ResultSet resultSet) {
         return (DepartmentDTO) toDictDTO(resultSet, new DepartmentDTO());
+    }
+
+    public static DepartmentDTO toDepartmentDTO(JSONObject jsonObject) {
+        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа DepartmentDTO
+        return null;
     }
 
     public static RegionDTO toRegionDTO(ResultSet resultSet) {
         return (RegionDTO) toDictDTO(resultSet, new RegionDTO());
     }
 
+    public static RegionDTO toRegionDTO(JSONObject jsonObject) {
+        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа RegionDTO
+        return null;
+    }
+
     public static PositionDTO toPositionDTO(ResultSet resultSet) {
         return (PositionDTO) toDictDTO(resultSet, new PositionDTO());
+    }
+
+    public static PositionDTO toPositionDTO(JSONObject jsonObject) {
+        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа PositionDTO
+        return null;
     }
 
     private static DictDTO toDictDTO(ResultSet resultSet, DictDTO dictDTO) {
