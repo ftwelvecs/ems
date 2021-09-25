@@ -81,8 +81,7 @@ public class AddressServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 AddressDTO addressDTO = Mapper.toAddressDTO(jsonObject);
-                // TODO: создать метод-заглушку в AddressService
-                // addressService.create(addressDTO);
+                addressService.create(addressDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -111,8 +110,7 @@ public class AddressServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 AddressDTO addressDTO = Mapper.toAddressDTO(jsonObject);
-                // TODO: создать метод-заглушку в AddressService
-                // addressService.update(addressDTO);
+                addressService.update(addressDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -141,8 +139,7 @@ public class AddressServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 AddressDTO addressDTO = Mapper.toAddressDTO(jsonObject);
-                // TODO: создать метод-заглушку в AddressService
-                // addressService.delete(addressDTO);
+                addressService.delete(addressDTO);
             } else {
                 printDefaultMessage(resp);
             }

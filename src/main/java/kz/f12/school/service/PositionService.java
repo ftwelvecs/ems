@@ -9,6 +9,18 @@ public class PositionService {
 
     private PositionRepository repository = new PositionRepository();
 
+    public void create(PositionDTO positionDTO) {
+
+    }
+
+    public void update(PositionDTO positionDTO) {
+
+    }
+
+    public void delete(PositionDTO positionDTO) {
+
+    }
+
     public PositionDTO findById(int positionId) {
         return repository.findById(positionId);
     }

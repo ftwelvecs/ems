@@ -81,8 +81,7 @@ public class DepartmentServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
-                // TODO: создать метод-заглушку в DepartmentService
-                // departmentService.create(departmentDTO);
+                departmentService.create(departmentDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -111,8 +110,7 @@ public class DepartmentServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
-                // TODO: создать метод-заглушку в DepartmentService
-                // departmentService.update(departmentDTO);
+                departmentService.update(departmentDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -141,8 +139,7 @@ public class DepartmentServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
-                // TODO: создать метод-заглушку в DepartmentService
-                // departmentService.delete(departmentDTO);
+                departmentService.delete(departmentDTO);
             } else {
                 printDefaultMessage(resp);
             }

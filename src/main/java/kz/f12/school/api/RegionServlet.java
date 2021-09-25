@@ -81,8 +81,7 @@ public class RegionServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 RegionDTO regionDTO = Mapper.toRegionDTO(jsonObject);
-                // TODO: создать метод-заглушку в RegionService
-                // regionService.create(regionDTO);
+                regionService.create(regionDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -111,8 +110,7 @@ public class RegionServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 RegionDTO regionDTO = Mapper.toRegionDTO(jsonObject);
-                // TODO: создать метод-заглушку в RegionService
-                // regionService.update(regionDTO);
+                regionService.update(regionDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -141,8 +139,7 @@ public class RegionServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 RegionDTO regionDTO = Mapper.toRegionDTO(jsonObject);
-                // TODO: создать метод-заглушку в RegionService
-                // regionService.delete(regionDTO);
+                regionService.delete(regionDTO);
             } else {
                 printDefaultMessage(resp);
             }

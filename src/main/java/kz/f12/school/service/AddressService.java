@@ -9,6 +9,18 @@ public class AddressService {
 
     private AddressRepository repository = new AddressRepository();
 
+    public void create(AddressDTO addressDTO) {
+
+    }
+
+    public void update(AddressDTO addressDTO) {
+
+    }
+
+    public void delete(AddressDTO addressDTO) {
+
+    }
+
     public AddressDTO findById(int addressId) {
         return repository.findById(addressId);
     }

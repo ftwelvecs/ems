@@ -81,7 +81,7 @@ public class UserServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 UserDTO userDTO = Mapper.toUserDTO(jsonObject);
                 userService.create(userDTO);
@@ -113,8 +113,7 @@ public class UserServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 UserDTO userDTO = Mapper.toUserDTO(jsonObject);
-                // TODO: создать метод-заглушку в UserService
-                // userService.update(userDTO);
+                userService.update(userDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -143,8 +142,7 @@ public class UserServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 UserDTO userDTO = Mapper.toUserDTO(jsonObject);
-                // TODO: создать метод-заглушку в UserService
-                // userService.delete(userDTO);
+                userService.delete(userDTO);
             } else {
                 printDefaultMessage(resp);
             }

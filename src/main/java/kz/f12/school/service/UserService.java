@@ -14,7 +14,15 @@ public class UserService {
     }
 
     public void create(UserDTO userDTO) {
-        // метод-заглушка, реализацию напишем на следующем уроке
+        repository.create(userDTO);
+    }
+
+    public void update(UserDTO userDTO) {
+        repository.update(userDTO);
+    }
+
+    public void delete(UserDTO userDTO) {
+        repository.delete(userDTO);
     }
 
     public List<UserDTO> getAll() {

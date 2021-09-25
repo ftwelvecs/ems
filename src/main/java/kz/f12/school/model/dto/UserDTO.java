@@ -6,6 +6,7 @@ public class UserDTO extends AbstractDTO {
     private String lastName;
     private String patronymic;
     private String email;
+    private String password;
     private Character isActive;
 
     public String getUsername() {
@@ -46,6 +47,14 @@ public class UserDTO extends AbstractDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Character getIsActive() {

@@ -9,6 +9,18 @@ public class DepartmentService {
 
     private DepartmentRepository repository = new DepartmentRepository();
 
+    public void create(DepartmentDTO departmentDTO) {
+
+    }
+
+    public void update(DepartmentDTO departmentDTO) {
+
+    }
+
+    public void delete(DepartmentDTO departmentDTO) {
+
+    }
+
     public DepartmentDTO findById(int departmentId) {
         return repository.findById(departmentId);
     }

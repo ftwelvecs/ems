@@ -81,8 +81,7 @@ public class PositionServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
-                // TODO: создать метод-заглушку в PositionService
-                // positionService.create(positionDTO);
+                positionService.create(positionDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -111,8 +110,7 @@ public class PositionServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
-                // TODO: создать метод-заглушку в PositionService
-                // positionService.update(positionDTO);
+                positionService.update(positionDTO);
             } else {
                 printDefaultMessage(resp);
             }
@@ -141,8 +139,7 @@ public class PositionServlet extends HttpServlet {
                 JSONObject jsonObject = new JSONObject(body);
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
-                // TODO: создать метод-заглушку в PositionService
-                // positionService.delete(positionDTO);
+                positionService.delete(positionDTO);
             } else {
                 printDefaultMessage(resp);
             }

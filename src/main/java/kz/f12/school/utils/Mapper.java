@@ -1,6 +1,7 @@
 package kz.f12.school.utils;
 
 import kz.f12.school.model.dto.*;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.ResultSet;
@@ -73,8 +74,18 @@ public class Mapper {
     }
 
     public static UserDTO toUserDTO(JSONObject jsonObject) {
-        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа UserDTO
-        return null;
+        UserDTO userDTO = new UserDTO();
+        try {
+            userDTO.setUsername(jsonObject.getString("username"));
+            userDTO.setFirstName(jsonObject.getString("firstName"));
+            userDTO.setLastName(jsonObject.getString("lastName"));
+            userDTO.setPatronymic(jsonObject.getString("patronymic"));
+            userDTO.setEmail(jsonObject.getString("email"));
+            userDTO.setPassword(jsonObject.getString("password"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return userDTO;
     }
 
     public static AddressDTO toAddressDTO(ResultSet resultSet) {
@@ -98,8 +109,10 @@ public class Mapper {
     }
 
     public static AddressDTO toAddressDTO(JSONObject jsonObject) {
-        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа AddressDTO
-        return null;
+        AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setAddress(jsonObject.getString("address"));
+        addressDTO.setCity(jsonObject.getString("city"));
+        return addressDTO;
     }
 
     public static DepartmentDTO toDepartmentDTO(ResultSet resultSet) {
@@ -107,8 +120,9 @@ public class Mapper {
     }
 
     public static DepartmentDTO toDepartmentDTO(JSONObject jsonObject) {
-        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа DepartmentDTO
-        return null;
+        DepartmentDTO departmentDTO = new DepartmentDTO();
+        departmentDTO.setName(jsonObject.getString("name"));
+        return departmentDTO;
     }
 
     public static RegionDTO toRegionDTO(ResultSet resultSet) {
@@ -116,8 +130,9 @@ public class Mapper {
     }
 
     public static RegionDTO toRegionDTO(JSONObject jsonObject) {
-        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа RegionDTO
-        return null;
+        RegionDTO regionDTO = new RegionDTO();
+        regionDTO.setName(jsonObject.getString("name"));
+        return regionDTO;
     }
 
     public static PositionDTO toPositionDTO(ResultSet resultSet) {
@@ -125,8 +140,9 @@ public class Mapper {
     }
 
     public static PositionDTO toPositionDTO(JSONObject jsonObject) {
-        // TODO: реализовать метод, который объект JSONObject преобразует в объект типа PositionDTO
-        return null;
+        PositionDTO positionDTO = new PositionDTO();
+        positionDTO.setName(jsonObject.getString("name"));
+        return positionDTO;
     }
 
     private static DictDTO toDictDTO(ResultSet resultSet, DictDTO dictDTO) {
