@@ -10,15 +10,18 @@ public class PositionService {
     private PositionRepository repository = new PositionRepository();
 
     public void create(PositionDTO positionDTO) {
-
+        // TODO: реализовать метод в репозитории
+        // repository.create(positionDTO);
     }
 
     public void update(PositionDTO positionDTO) {
-
+        // TODO: реализовать метод в репозитории
+        // repository.update(positionDTO);
     }
 
     public void delete(PositionDTO positionDTO) {
-
+        // TODO: реализовать метод в репозитории
+        // repository.delete(positionDTO);
     }
 
     public PositionDTO findById(int positionId) {

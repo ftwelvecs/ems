@@ -110,7 +110,7 @@ public class UserServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 UserDTO userDTO = Mapper.toUserDTO(jsonObject);
                 userService.update(userDTO);
@@ -139,7 +139,7 @@ public class UserServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 UserDTO userDTO = Mapper.toUserDTO(jsonObject);
                 userService.delete(userDTO);

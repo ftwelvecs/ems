@@ -78,7 +78,7 @@ public class DepartmentServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
                 departmentService.create(departmentDTO);
@@ -107,7 +107,7 @@ public class DepartmentServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
                 departmentService.update(departmentDTO);
@@ -136,7 +136,7 @@ public class DepartmentServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
                 departmentService.delete(departmentDTO);

@@ -4,6 +4,7 @@ import kz.f12.school.model.dto.UserDTO;
 import kz.f12.school.model.repository.UserRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserService {
 
@@ -14,7 +15,13 @@ public class UserService {
     }
 
     public void create(UserDTO userDTO) {
+        userDTO.setPassword(md5(userDTO.getPassword()));
         repository.create(userDTO);
+    }
+
+    private String md5(String password) {
+        // в будущем напишем логику хэширования
+        return password;
     }
 
     public void update(UserDTO userDTO) {
@@ -26,6 +33,7 @@ public class UserService {
     }
 
     public List<UserDTO> getAll() {
-        return repository.getAll();
+        return repository.getAll().stream().filter(userDTO -> userDTO.getIsActive() == 'Y')
+                .collect(Collectors.toList());
     }
 }

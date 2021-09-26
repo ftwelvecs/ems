@@ -78,7 +78,7 @@ public class AddressServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 AddressDTO addressDTO = Mapper.toAddressDTO(jsonObject);
                 addressService.create(addressDTO);
@@ -107,7 +107,7 @@ public class AddressServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 AddressDTO addressDTO = Mapper.toAddressDTO(jsonObject);
                 addressService.update(addressDTO);
@@ -136,7 +136,7 @@ public class AddressServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 AddressDTO addressDTO = Mapper.toAddressDTO(jsonObject);
                 addressService.delete(addressDTO);

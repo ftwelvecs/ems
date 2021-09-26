@@ -78,7 +78,7 @@ public class PositionServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
                 positionService.create(positionDTO);
@@ -107,7 +107,7 @@ public class PositionServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
                 positionService.update(positionDTO);
@@ -136,7 +136,7 @@ public class PositionServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
                 positionService.delete(positionDTO);

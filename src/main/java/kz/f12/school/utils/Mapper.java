@@ -10,24 +10,6 @@ import java.util.Date;
 
 public class Mapper {
 
-    public static EmployeeDTO toEmployeeDTO(String[] employee) {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(Integer.parseInt(employee[0]));
-        employeeDTO.setName(employee[1]);
-        employeeDTO.setDepartmentName(employee[2]);
-        employeeDTO.setAge(Integer.parseInt(employee[3]));
-        return employeeDTO;
-    }
-
-    public static EmployeeDTO toEmployeeDTO(JSONObject jsonObject) {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(jsonObject.getInt("id"));
-        employeeDTO.setName(jsonObject.getString("name"));
-        employeeDTO.setDepartmentName(jsonObject.getString("departmentName"));
-        employeeDTO.setAge(jsonObject.getInt("age"));
-        return employeeDTO;
-    }
-
     public static AbstractDTO map(ResultSet resultSet, String type) {
         AbstractDTO result = null;
         switch (type) {
@@ -55,6 +37,8 @@ public class Mapper {
             Integer id = resultSet.getInt("id");
             String username = resultSet.getString("username");
             String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            String patronymic = resultSet.getString("patronymic");
             String email = resultSet.getString("email");
             String isActive = resultSet.getString("is_active");
             Date createDate = resultSet.getDate("create_date");
@@ -63,6 +47,8 @@ public class Mapper {
             userDTO.setId(id);
             userDTO.setUsername(username);
             userDTO.setFirstName(firstName);
+            userDTO.setLastName(lastName);
+            userDTO.setPatronymic(patronymic);
             userDTO.setEmail(email);
             userDTO.setIsActive(isActive.charAt(0));
             userDTO.setCreateDate(createDate);
@@ -76,12 +62,21 @@ public class Mapper {
     public static UserDTO toUserDTO(JSONObject jsonObject) {
         UserDTO userDTO = new UserDTO();
         try {
-            userDTO.setUsername(jsonObject.getString("username"));
-            userDTO.setFirstName(jsonObject.getString("firstName"));
-            userDTO.setLastName(jsonObject.getString("lastName"));
-            userDTO.setPatronymic(jsonObject.getString("patronymic"));
-            userDTO.setEmail(jsonObject.getString("email"));
-            userDTO.setPassword(jsonObject.getString("password"));
+            Integer id = jsonObject.isNull("id") ? null : jsonObject.getInt("id");
+            String username = jsonObject.isNull("username") ? null : jsonObject.getString("username");
+            String firstName = jsonObject.isNull("firstName") ? null : jsonObject.getString("firstName");
+            String lastName = jsonObject.isNull("lastName") ? null : jsonObject.getString("lastName");
+            String patronymic = jsonObject.isNull("patronymic") ? null : jsonObject.getString("patronymic");
+            String email = jsonObject.isNull("email") ? null : jsonObject.getString("email");
+            String password = jsonObject.isNull("password") ? null : jsonObject.getString("password");
+
+            userDTO.setId(id);
+            userDTO.setUsername(username);
+            userDTO.setFirstName(firstName);
+            userDTO.setLastName(lastName);
+            userDTO.setPatronymic(patronymic);
+            userDTO.setEmail(email);
+            userDTO.setPassword(password);
         } catch (JSONException e) {
             e.printStackTrace();
         }

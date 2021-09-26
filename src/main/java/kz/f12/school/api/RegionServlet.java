@@ -78,7 +78,7 @@ public class RegionServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 RegionDTO regionDTO = Mapper.toRegionDTO(jsonObject);
                 regionService.create(regionDTO);
@@ -107,7 +107,7 @@ public class RegionServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 RegionDTO regionDTO = Mapper.toRegionDTO(jsonObject);
                 regionService.update(regionDTO);
@@ -136,7 +136,7 @@ public class RegionServlet extends HttpServlet {
                     if (part != null) body.append(part);
                 }
 
-                JSONObject jsonObject = new JSONObject(body);
+                JSONObject jsonObject = new JSONObject(body.toString());
 
                 RegionDTO regionDTO = Mapper.toRegionDTO(jsonObject);
                 regionService.delete(regionDTO);
