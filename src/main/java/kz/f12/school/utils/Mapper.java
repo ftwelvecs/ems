@@ -1,6 +1,7 @@
 package kz.f12.school.utils;
 
 import kz.f12.school.model.dto.*;
+import kz.f12.school.model.repository.RegionRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,6 +10,8 @@ import java.sql.SQLException;
 import java.util.Date;
 
 public class Mapper {
+
+    private static RegionRepository regionRepository = new RegionRepository();
 
     public static AbstractDTO map(ResultSet resultSet, String type) {
         AbstractDTO result = null;
@@ -111,7 +114,16 @@ public class Mapper {
     }
 
     public static DepartmentDTO toDepartmentDTO(ResultSet resultSet) {
-        return (DepartmentDTO) toDictDTO(resultSet, new DepartmentDTO());
+        DepartmentDTO departmentDTO = null;
+        try {
+            departmentDTO = (DepartmentDTO) toDictDTO(resultSet, new DepartmentDTO());
+            Integer regionId = resultSet.getInt("region_id");
+            RegionDTO regionDTO = regionRepository.findById(regionId);
+            departmentDTO.setRegion(regionDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return departmentDTO;
     }
 
     public static DepartmentDTO toDepartmentDTO(JSONObject jsonObject) {

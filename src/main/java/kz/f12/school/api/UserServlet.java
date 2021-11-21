@@ -2,6 +2,7 @@ package kz.f12.school.api;
 
 import kz.f12.school.model.dto.UserDTO;
 import kz.f12.school.service.UserService;
+import kz.f12.school.utils.HttpUtils;
 import kz.f12.school.utils.Mapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,6 +53,7 @@ public class UserServlet extends HttpServlet {
 
                 // указываем возвращаемый тип как json
                 resp.setContentType("application/json");
+                HttpUtils.addAllowHeaders(resp);
 
                 PrintWriter printWriter = resp.getWriter();
                 printWriter.write(jsonArray.toString());

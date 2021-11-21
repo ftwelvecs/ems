@@ -8,6 +8,8 @@ public class UserDTO extends AbstractDTO {
     private String email;
     private String password;
     private Character isActive;
+    private DepartmentDTO department;
+    private PositionDTO position;
 
     public String getUsername() {
         return username;
