@@ -1,6 +1,8 @@
 package kz.f12.school.utils;
 
 import kz.f12.school.model.dto.*;
+import kz.f12.school.model.repository.DepartmentRepository;
+import kz.f12.school.model.repository.PositionRepository;
 import kz.f12.school.model.repository.RegionRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +13,9 @@ import java.util.Date;
 
 public class Mapper {
 
-    private static RegionRepository regionRepository = new RegionRepository();
+    private final static RegionRepository regionRepository = new RegionRepository();
+    private final static DepartmentRepository departmentRepository = new DepartmentRepository();
+    private final static PositionRepository positionRepository = new PositionRepository();
 
     public static AbstractDTO map(ResultSet resultSet, String type) {
         AbstractDTO result = null;
@@ -33,7 +37,7 @@ public class Mapper {
         }
         return result;
     }
-
+    // чтобы отправить данные из базы в фронт
     public static UserDTO toUserDTO(ResultSet resultSet) {
         UserDTO userDTO = new UserDTO();
         try {
@@ -41,27 +45,34 @@ public class Mapper {
             String username = resultSet.getString("username");
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
-            String patronymic = resultSet.getString("patronymic");
             String email = resultSet.getString("email");
             String isActive = resultSet.getString("is_active");
             Date createDate = resultSet.getDate("create_date");
             Date lastUpdateDate = resultSet.getDate("last_update_date");
 
+            Integer departmentId = resultSet.getInt("department_id");
+            DepartmentDTO department = departmentRepository.findById(departmentId);
+
+            Integer positionId = resultSet.getInt("position_id");
+            PositionDTO position = positionRepository.findById(positionId);
+
             userDTO.setId(id);
             userDTO.setUsername(username);
             userDTO.setFirstName(firstName);
             userDTO.setLastName(lastName);
-            userDTO.setPatronymic(patronymic);
             userDTO.setEmail(email);
             userDTO.setIsActive(isActive.charAt(0));
             userDTO.setCreateDate(createDate);
             userDTO.setLastUpdateDate(lastUpdateDate);
+            userDTO.setDepartment(department);
+            userDTO.setPosition(position);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return userDTO;
     }
 
+    // чтобы получать из фронта и сохранять в базе
     public static UserDTO toUserDTO(JSONObject jsonObject) {
         UserDTO userDTO = new UserDTO();
         try {
@@ -69,7 +80,7 @@ public class Mapper {
             String username = jsonObject.isNull("username") ? null : jsonObject.getString("username");
             String firstName = jsonObject.isNull("firstName") ? null : jsonObject.getString("firstName");
             String lastName = jsonObject.isNull("lastName") ? null : jsonObject.getString("lastName");
-            String patronymic = jsonObject.isNull("patronymic") ? null : jsonObject.getString("patronymic");
+            // String patronymic = jsonObject.isNull("patronymic") ? null : jsonObject.getString("patronymic");
             String email = jsonObject.isNull("email") ? null : jsonObject.getString("email");
             String password = jsonObject.isNull("password") ? null : jsonObject.getString("password");
 
@@ -77,7 +88,7 @@ public class Mapper {
             userDTO.setUsername(username);
             userDTO.setFirstName(firstName);
             userDTO.setLastName(lastName);
-            userDTO.setPatronymic(patronymic);
+            // userDTO.setPatronymic(patronymic);
             userDTO.setEmail(email);
             userDTO.setPassword(password);
         } catch (JSONException e) {

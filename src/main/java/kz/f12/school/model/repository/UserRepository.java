@@ -10,7 +10,8 @@ import java.sql.SQLException;
 public class UserRepository extends AbstractRepository<UserDTO> {
 
     public void create(UserDTO userDTO) {
-        Connection connection = getConnection();
+        // переделаем потом
+        /*Connection connection = getConnection();
         try {
             PreparedStatement stmt = connection.prepareStatement("insert into main.users(username, password, first_name, last_name, patronymic, email) values (?, ?, ?, ?, ?, ?)");
             stmt.setString(1, userDTO.getUsername());
@@ -22,23 +23,23 @@ public class UserRepository extends AbstractRepository<UserDTO> {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void update(UserDTO userDTO) {
-        Connection connection = getConnection();
+        // переделаем потом
+        /*Connection connection = getConnection();
         try {
             PreparedStatement stmt = connection.prepareStatement("update main.users set first_name = ?, last_name = ?, patronymic = ?, last_update_date = ? where id = ?");
             stmt.setString(1, userDTO.getFirstName());
             stmt.setString(2, userDTO.getLastName());
-            stmt.setString(3, userDTO.getPatronymic());
             long currentTime = new java.util.Date().getTime();
             stmt.setDate(4, new Date(currentTime));
             stmt.setInt(5, userDTO.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void delete(UserDTO userDTO) {

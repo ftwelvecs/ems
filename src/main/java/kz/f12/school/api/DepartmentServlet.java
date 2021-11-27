@@ -2,6 +2,7 @@ package kz.f12.school.api;
 
 import kz.f12.school.model.dto.DepartmentDTO;
 import kz.f12.school.service.DepartmentService;
+import kz.f12.school.utils.HttpUtils;
 import kz.f12.school.utils.Mapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,7 +49,9 @@ public class DepartmentServlet extends HttpServlet {
                 JSONArray jsonArray = new JSONArray(departmentDTOList);
 
                 // указываем возвращаемый тип как json
-                resp.setContentType("application/json");
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.setCharacterEncoding("UTF-8");
+                HttpUtils.addAllowHeaders(resp);
 
                 PrintWriter printWriter = resp.getWriter();
                 printWriter.write(jsonArray.toString());

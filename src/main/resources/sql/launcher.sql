@@ -2,22 +2,6 @@
 
 create schema main;
 
-create sequence main.users_s;
-
-create table main.users
-(
-    id               bigint primary key default nextval('main.users_s'),
-    username         varchar(255) unique not null,
-    password         varchar(1000)       not null,
-    first_name       varchar(255)        not null,
-    last_name        varchar(255),
-    patronymic       varchar(255),
-    email            varchar(255) unique not null,
-    is_active        varchar(1)         default 'Y',
-    create_date      timestamp          default current_timestamp,
-    last_update_date timestamp
-);
-
 -- примеры комментирования:
 -- comment on table main.users is 'Таблица пользователей';
 -- comment on column main.users.username is 'поле для логина пользователя';
@@ -32,16 +16,6 @@ create table main.addresses
     city             varchar(255) not null,
     address          varchar(255) not null,
     create_date      timestamp          default current_timestamp,
-    last_update_date timestamp
-);
-
-create sequence main.departments_s;
-
-create table main.departments
-(
-    id               bigint primary key default nextval('main.departments_s'),
-    name             varchar(255) not null,
-    create_date      timestamp,
     last_update_date timestamp
 );
 
@@ -62,6 +36,34 @@ create table main.regions
     id               bigint primary key default nextval('main.regions_s'),
     name             varchar(255) not null,
     create_date      timestamp,
+    last_update_date timestamp
+);
+
+create sequence main.departments_s;
+
+create table main.departments
+(
+    id               bigint primary key default nextval('main.departments_s'),
+    name             varchar(255) not null,
+    region_id        references main.regions (id),
+    create_date      timestamp,
+    last_update_date timestamp
+);
+
+create sequence main.users_s;
+
+create table main.users
+(
+    id               bigint primary key default nextval('main.users_s'),
+    username         varchar(255) unique not null,
+    password         varchar(1000)       not null,
+    first_name       varchar(255)        not null,
+    last_name        varchar(255),
+    email            varchar(255) unique not null,
+    is_active        varchar(1)         default 'Y',
+    department_id    references main.departments (id),
+    position_id      references main.positions (id),
+    create_date      timestamp          default current_timestamp,
     last_update_date timestamp
 );
 

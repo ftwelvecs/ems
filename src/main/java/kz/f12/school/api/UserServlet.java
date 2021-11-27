@@ -52,7 +52,8 @@ public class UserServlet extends HttpServlet {
                 JSONArray jsonArray = new JSONArray(userDTOList);
 
                 // указываем возвращаемый тип как json
-                resp.setContentType("application/json");
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.setCharacterEncoding("UTF-8");
                 HttpUtils.addAllowHeaders(resp);
 
                 PrintWriter printWriter = resp.getWriter();
