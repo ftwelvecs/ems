@@ -85,6 +85,7 @@ public class PositionServlet extends HttpServlet {
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
                 positionService.create(positionDTO);
+                HttpUtils.addAllowHeaders(resp);
             } else {
                 printDefaultMessage(resp);
             }
@@ -149,6 +150,14 @@ public class PositionServlet extends HttpServlet {
         } else {
             printDefaultMessage(resp);
         }
+    }
+
+    // Проверочный метод для клиентов
+    // сообщает им что сервер работает и готов принимать запросы
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doOptions(req, resp);
+        HttpUtils.addAllowHeaders(resp);
     }
 
     // печатаем сообщение по умолчанию

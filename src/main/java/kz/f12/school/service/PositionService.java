@@ -10,8 +10,7 @@ public class PositionService {
     private PositionRepository repository = new PositionRepository();
 
     public void create(PositionDTO positionDTO) {
-        // TODO: реализовать метод в репозитории
-        // repository.create(positionDTO);
+        repository.create(positionDTO);
     }
 
     public void update(PositionDTO positionDTO) {
