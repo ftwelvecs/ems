@@ -2,6 +2,7 @@ package kz.f12.school.api;
 
 import kz.f12.school.model.dto.RegionDTO;
 import kz.f12.school.service.RegionService;
+import kz.f12.school.utils.HttpUtils;
 import kz.f12.school.utils.Mapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,7 +49,9 @@ public class RegionServlet extends HttpServlet {
                 JSONArray jsonArray = new JSONArray(regionDTOList);
 
                 // указываем возвращаемый тип как json
-                resp.setContentType("application/json");
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.setCharacterEncoding("UTF-8");
+                HttpUtils.addAllowHeaders(resp);
 
                 PrintWriter printWriter = resp.getWriter();
                 printWriter.write(jsonArray.toString());
@@ -82,6 +85,7 @@ public class RegionServlet extends HttpServlet {
 
                 RegionDTO regionDTO = Mapper.toRegionDTO(jsonObject);
                 regionService.create(regionDTO);
+                HttpUtils.addAllowHeaders(resp);
             } else {
                 printDefaultMessage(resp);
             }
@@ -146,6 +150,14 @@ public class RegionServlet extends HttpServlet {
         } else {
             printDefaultMessage(resp);
         }
+    }
+
+    // Проверочный метод для клиентов
+    // сообщает им что сервер работает и готов принимать запросы
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doOptions(req, resp);
+        HttpUtils.addAllowHeaders(resp);
     }
 
     // печатаем сообщение по умолчанию

@@ -10,8 +10,7 @@ public class DepartmentService {
     private DepartmentRepository repository = new DepartmentRepository();
 
     public void create(DepartmentDTO departmentDTO) {
-        // TODO: реализовать метод в репозитории
-        // repository.create(departmentDTO);
+        repository.create(departmentDTO);
     }
 
     public void update(DepartmentDTO departmentDTO) {

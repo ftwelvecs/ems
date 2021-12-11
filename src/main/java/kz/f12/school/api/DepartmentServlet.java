@@ -85,6 +85,10 @@ public class DepartmentServlet extends HttpServlet {
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
                 departmentService.create(departmentDTO);
+                // указываем возвращаемый тип как json
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.setCharacterEncoding("UTF-8");
+                HttpUtils.addAllowHeaders(resp);
             } else {
                 printDefaultMessage(resp);
             }
@@ -149,6 +153,14 @@ public class DepartmentServlet extends HttpServlet {
         } else {
             printDefaultMessage(resp);
         }
+    }
+
+    // Проверочный метод для клиентов
+    // сообщает им что сервер работает и готов принимать запросы
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doOptions(req, resp);
+        HttpUtils.addAllowHeaders(resp);
     }
 
     // печатаем сообщение по умолчанию

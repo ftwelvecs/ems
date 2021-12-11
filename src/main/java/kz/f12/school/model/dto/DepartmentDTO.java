@@ -1,13 +1,9 @@
 package kz.f12.school.model.dto;
 
+import lombok.Data;
+
+@Data
 public class DepartmentDTO extends DictDTO {
     RegionDTO region;
-
-    public RegionDTO getRegion() {
-        return region;
-    }
-
-    public void setRegion(RegionDTO region) {
-        this.region = region;
-    }
+    Integer regionId;
 }
