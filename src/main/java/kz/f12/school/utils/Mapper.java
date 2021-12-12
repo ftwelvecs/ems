@@ -139,6 +139,7 @@ public class Mapper {
 
     public static DepartmentDTO toDepartmentDTO(JSONObject jsonObject) {
         DepartmentDTO departmentDTO = new DepartmentDTO();
+        departmentDTO.setId(jsonObject.getInt("id"));
         departmentDTO.setName(jsonObject.getString("name"));
         Integer regionId = jsonObject.getJSONObject("region").getInt("id");
         departmentDTO.setRegionId(regionId);

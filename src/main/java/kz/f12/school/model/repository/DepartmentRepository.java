@@ -23,6 +23,20 @@ public class DepartmentRepository extends AbstractRepository<DepartmentDTO> {
         }
     }
 
+    public void update(DepartmentDTO departmentDTO) {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("update main.departments set name = ?, region_id = ?, last_update_date = ? where id = ?");
+            statement.setString(1, departmentDTO.getName());
+            statement.setInt(2, departmentDTO.getRegionId());
+            statement.setDate(3, new Date(System.currentTimeMillis()));
+            statement.setInt(4, departmentDTO.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String getTableName() {
         return "departments";

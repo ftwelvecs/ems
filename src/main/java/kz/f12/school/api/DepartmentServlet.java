@@ -118,6 +118,9 @@ public class DepartmentServlet extends HttpServlet {
 
                 DepartmentDTO departmentDTO = Mapper.toDepartmentDTO(jsonObject);
                 departmentService.update(departmentDTO);
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.setCharacterEncoding("UTF-8");
+                HttpUtils.addAllowHeaders(resp);
             } else {
                 printDefaultMessage(resp);
             }

@@ -14,8 +14,7 @@ public class DepartmentService {
     }
 
     public void update(DepartmentDTO departmentDTO) {
-        // TODO: реализовать метод в репозитории
-        // repository.update(departmentDTO);
+        repository.update(departmentDTO);
     }
 
     public void delete(DepartmentDTO departmentDTO) {
