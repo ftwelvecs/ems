@@ -115,6 +115,7 @@ public class PositionServlet extends HttpServlet {
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
                 positionService.update(positionDTO);
+                HttpUtils.addAllowHeaders(resp);
             } else {
                 printDefaultMessage(resp);
             }
@@ -144,6 +145,7 @@ public class PositionServlet extends HttpServlet {
 
                 PositionDTO positionDTO = Mapper.toPositionDTO(jsonObject);
                 positionService.delete(positionDTO);
+                HttpUtils.addAllowHeaders(resp);
             } else {
                 printDefaultMessage(resp);
             }

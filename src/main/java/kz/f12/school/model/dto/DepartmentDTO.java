@@ -6,4 +6,5 @@ import lombok.Data;
 public class DepartmentDTO extends DictDTO {
     RegionDTO region;
     Integer regionId;
+    Boolean isActive;
 }

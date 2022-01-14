@@ -131,6 +131,7 @@ public class Mapper {
             Integer regionId = resultSet.getInt("region_id");
             RegionDTO regionDTO = regionRepository.findById(regionId);
             departmentDTO.setRegion(regionDTO);
+            departmentDTO.setIsActive("Y".equals(resultSet.getString("is_active")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -139,10 +140,14 @@ public class Mapper {
 
     public static DepartmentDTO toDepartmentDTO(JSONObject jsonObject) {
         DepartmentDTO departmentDTO = new DepartmentDTO();
-        departmentDTO.setId(jsonObject.getInt("id"));
+        if (!jsonObject.isNull("id")) {
+            departmentDTO.setId(jsonObject.getInt("id"));
+        }
         departmentDTO.setName(jsonObject.getString("name"));
-        Integer regionId = jsonObject.getJSONObject("region").getInt("id");
-        departmentDTO.setRegionId(regionId);
+        if (!jsonObject.getJSONObject("region").isNull("id")) {
+            Integer regionId = jsonObject.getJSONObject("region").getInt("id");
+            departmentDTO.setRegionId(regionId);
+        }
         return departmentDTO;
     }
 
@@ -157,11 +162,20 @@ public class Mapper {
     }
 
     public static PositionDTO toPositionDTO(ResultSet resultSet) {
-        return (PositionDTO) toDictDTO(resultSet, new PositionDTO());
+        PositionDTO positionDTO = (PositionDTO) toDictDTO(resultSet, new PositionDTO());
+        try {
+            positionDTO.setIsActive("Y".equals(resultSet.getString("is_active")));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return positionDTO;
     }
 
     public static PositionDTO toPositionDTO(JSONObject jsonObject) {
         PositionDTO positionDTO = new PositionDTO();
+        if (!jsonObject.isNull("id")) {
+            positionDTO.setId(jsonObject.getInt("id"));
+        }
         positionDTO.setName(jsonObject.getString("name"));
         return positionDTO;
     }

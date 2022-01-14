@@ -4,6 +4,7 @@ import kz.f12.school.model.dto.PositionDTO;
 import kz.f12.school.model.repository.PositionRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PositionService {
 
@@ -14,13 +15,11 @@ public class PositionService {
     }
 
     public void update(PositionDTO positionDTO) {
-        // TODO: реализовать метод в репозитории
-        // repository.update(positionDTO);
+        repository.update(positionDTO);
     }
 
     public void delete(PositionDTO positionDTO) {
-        // TODO: реализовать метод в репозитории
-        // repository.delete(positionDTO);
+        repository.delete(positionDTO);
     }
 
     public PositionDTO findById(int positionId) {
@@ -28,7 +27,7 @@ public class PositionService {
     }
 
     public List<PositionDTO> getAll() {
-        return repository.getAll();
+        return repository.getAll().stream().filter(PositionDTO::getIsActive).collect(Collectors.toList());
     }
 
 }

@@ -37,6 +37,18 @@ public class DepartmentRepository extends AbstractRepository<DepartmentDTO> {
         }
     }
 
+    public void delete(DepartmentDTO departmentDTO) {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("update main.departments set is_active = 'N', last_update_date = ? where id = ?");
+            statement.setDate(1, new Date(System.currentTimeMillis()));
+            statement.setInt(2, departmentDTO.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String getTableName() {
         return "departments";

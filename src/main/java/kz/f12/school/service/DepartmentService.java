@@ -4,6 +4,7 @@ import kz.f12.school.model.dto.DepartmentDTO;
 import kz.f12.school.model.repository.DepartmentRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DepartmentService {
 
@@ -18,8 +19,7 @@ public class DepartmentService {
     }
 
     public void delete(DepartmentDTO departmentDTO) {
-        // TODO: реализовать метод в репозитории
-        // repository.delete(departmentDTO);
+        repository.delete(departmentDTO);
     }
 
     public DepartmentDTO findById(int departmentId) {
@@ -27,7 +27,7 @@ public class DepartmentService {
     }
 
     public List<DepartmentDTO> getAll() {
-        return repository.getAll();
+        return repository.getAll().stream().filter(DepartmentDTO::getIsActive).collect(Collectors.toList());
     }
 
 }

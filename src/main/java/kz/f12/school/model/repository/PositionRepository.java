@@ -22,6 +22,31 @@ public class PositionRepository extends AbstractRepository<PositionDTO> {
         }
     }
 
+    public void update(PositionDTO positionDTO) {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("update main.positions set name = ?, last_update_date = ? where id = ?");
+            statement.setString(1, positionDTO.getName());
+            statement.setDate(2, new Date(System.currentTimeMillis()));
+            statement.setInt(3, positionDTO.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(PositionDTO positionDTO) {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("update main.positions set is_active = 'N', last_update_date = ? where id = ?");
+            statement.setDate(1, new Date(System.currentTimeMillis()));
+            statement.setInt(2, positionDTO.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String getTableName() {
         return "positions";
