@@ -3,6 +3,7 @@ package kz.f12.school.ems.web;
 import kz.f12.school.ems.model.entity.Position;
 import kz.f12.school.ems.service.PositionService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,13 +15,8 @@ public class PositionController {
     private final PositionService positionService;
 
     @GetMapping("/position")
-    public List<Position> findAll() {
-        return positionService.findAll();
-    }
-
-    @GetMapping("/position/findByName")
-    public Position findByName(@RequestParam("name") String name) {
-        return positionService.findByName(name);
+    public ResponseEntity<List<Position>> findAll() {
+        return ResponseEntity.ok(positionService.findAll());
     }
 
     @GetMapping("/position/{id}")

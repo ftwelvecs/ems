@@ -1,5 +1,6 @@
 package kz.f12.school.ems.service;
 
+import kz.f12.school.ems.exception.EntityNotFountException;
 import kz.f12.school.ems.model.entity.Position;
 import kz.f12.school.ems.model.repository.PositionRepository;
 import lombok.AllArgsConstructor;
@@ -20,11 +21,9 @@ public class PositionService {
 
     public Position findById(Long id) {
         Optional<Position> optionalPosition = positionRepository.findById(id);
-        return optionalPosition.orElse(null);
-    }
-
-    public Position findByName(String name) {
-        Optional<Position> optionalPosition = positionRepository.findByName(name);
-        return optionalPosition.orElse(null);
+        if (optionalPosition.isPresent())
+            return optionalPosition.get();
+        else
+            throw new EntityNotFountException();
     }
 }
