@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/position")
 @AllArgsConstructor
 public class PositionController {
 
     private final PositionService positionService;
 
-    @GetMapping("/position")
+    @GetMapping
     public ResponseEntity<List<Position>> findAll() {
         return ResponseEntity.ok(positionService.findAll());
     }
 
-    @GetMapping("/position/{id}")
+    @GetMapping("/{id}")
     public Position findById(@PathVariable("id") Long id) {
         return positionService.findById(id);
     }

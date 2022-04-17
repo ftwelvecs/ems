@@ -1,5 +1,7 @@
 package kz.f12.school.ems.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import kz.f12.school.ems.enums.Role;
 import kz.f12.school.ems.util.BooleanToStringConverter;
 import lombok.Data;
 
@@ -20,6 +22,7 @@ public class User {
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     @Column(name = "first_name")
@@ -53,4 +56,7 @@ public class User {
     @Column(name = "last_update_date")
     private LocalDateTime lastUpdateDate;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 }
