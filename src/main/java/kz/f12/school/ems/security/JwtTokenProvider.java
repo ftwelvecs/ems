@@ -1,16 +1,19 @@
 package kz.f12.school.ems.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import kz.f12.school.ems.dto.AuthenticationRequestDto;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 @Setter
@@ -22,36 +25,47 @@ public class JwtTokenProvider {
     @Value("${jwt.token.secretKey}")
     private String secretKey;
 
-    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
 
-    public JwtTokenProvider(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+    public JwtTokenProvider(@Qualifier("defineUserService") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
-    public String generateToken(AuthenticationRequestDto request) {
+    public String generateToken(String username, String role) {
         Date now = new Date();
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("role", request.getRole());
-        properties.put("password", passwordEncoder.encode(request.getPassword()));
+        Date expiration = new Date(now.getTime() + expirationInSec * 1000);
+        // объект claims хранит внутри информацию о токене
+        Claims claims = Jwts.claims()
+                .setSubject(username)
+                .setIssuedAt(now)
+                .setExpiration(expiration);
+        claims.put("role", role);
 
         String token = Jwts.builder()
-                .setSubject(request.getUsername())
-                .setClaims(properties)
-                .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + expirationInSec * 1000))
+                .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
         return token;
     }
 
-   /* public boolean checkToken(String token) {
-        getParam(token);
-        return true;
+    public String resolveToken(HttpServletRequest request) {
+        // токен берем из заголовка Authorization
+        return request.getHeader("Authorization");
     }
 
-    private String getParam(String token) {
-        return Jwts.parser().parse(token).toString();
+    public boolean checkToken(String token) {
+        // проверка на время действия токена
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getExpiration().after(new Date());
     }
-*/
+
+    public Authentication getAuthentication(String token) {
+        // создаем объект Authentication из токена
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    public String getUsername(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    }
 }
