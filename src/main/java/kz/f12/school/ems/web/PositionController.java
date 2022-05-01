@@ -24,4 +24,9 @@ public class PositionController {
     public Position findById(@PathVariable("id") Long id) {
         return positionService.findById(id);
     }
+
+    @PostMapping
+    public void create(@RequestBody Position position) {
+        positionService.create(position);
+    }
 }

@@ -26,4 +26,8 @@ public class PositionService {
         else
             throw new EntityNotFountException();
     }
+
+    public void create(Position position) {
+        positionRepository.save(position);
+    }
 }
