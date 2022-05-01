@@ -26,8 +26,8 @@ public class JwtFilter extends GenericFilterBean {
     // фильтр вызывается при каждом запросе до rest endpoints
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         // берем токен
-        String token = jwtTokenProvider.resolveToken((HttpServletRequest) servletRequest);
         try {
+            String token = jwtTokenProvider.resolveToken((HttpServletRequest) servletRequest);
             // проверяем
             if (token != null && jwtTokenProvider.checkToken(token)) {
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);

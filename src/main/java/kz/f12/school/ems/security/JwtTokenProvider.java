@@ -3,6 +3,7 @@ package kz.f12.school.ems.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import kz.f12.school.ems.exception.InvalidTokenException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Objects;
 
 @Component
 @Setter
@@ -51,7 +53,12 @@ public class JwtTokenProvider {
 
     public String resolveToken(HttpServletRequest request) {
         // токен берем из заголовка Authorization
-        return request.getHeader("Authorization");
+        String token = request.getHeader("Authorization");
+        if (Objects.nonNull(token)) {
+            return token.replace("Bearer ", "");
+        } else {
+            throw new InvalidTokenException("token is null");
+        }
     }
 
     public boolean checkToken(String token) {
