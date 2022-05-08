@@ -27,6 +27,16 @@ public class PositionController {
 
     @PostMapping
     public void create(@RequestBody Position position) {
-        positionService.create(position);
+        positionService.save(position);
+    }
+
+    @PutMapping
+    public void update(@RequestBody Position position) {
+        positionService.save(position);
+    }
+
+    @DeleteMapping
+    public void delete(@RequestBody Position position) {
+        positionService.delete(position);
     }
 }
