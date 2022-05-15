@@ -1,12 +1,9 @@
 package kz.f12.school.ems.web;
 
 import kz.f12.school.ems.model.entity.User;
-import kz.f12.school.ems.model.repository.UserRepository;
+import kz.f12.school.ems.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,12 +12,26 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
 
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    @PreAuthorize("hasAuthority('write')")
     @GetMapping
     public List<User> getAll() {
-        return userRepository.findAll();
+        return userService.findAll();
+    }
+
+    @PostMapping
+    public void create(@RequestBody User user) {
+        userService.save(user);
+    }
+
+    @PutMapping
+    public void update(@RequestBody User user) {
+        userService.save(user);
+    }
+
+    @DeleteMapping
+    public void delete(@RequestBody User user) {
+        userService.delete(user);
     }
 
 }
