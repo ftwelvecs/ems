@@ -1,9 +1,11 @@
 package kz.f12.school.ems.service;
 
+import kz.f12.school.ems.exception.DeleteUsedRecordException;
 import kz.f12.school.ems.exception.EntityNotFountException;
 import kz.f12.school.ems.model.entity.Position;
 import kz.f12.school.ems.model.repository.PositionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +34,10 @@ public class PositionService {
     }
 
     public void delete(Position position) {
-        positionRepository.delete(position);
+        try {
+            positionRepository.delete(position);
+        } catch (DataIntegrityViolationException e) {
+            throw new DeleteUsedRecordException();
+        }
     }
 }

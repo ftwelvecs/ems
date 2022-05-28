@@ -1,6 +1,5 @@
 package kz.f12.school.ems.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import kz.f12.school.ems.enums.Role;
 import kz.f12.school.ems.util.BooleanToStringConverter;
 import lombok.Data;
@@ -22,7 +21,6 @@ public class User {
 
     private String username;
 
-    @JsonIgnore
     private String password;
 
     @Column(name = "first_name")
@@ -37,7 +35,7 @@ public class User {
 
     @Convert(converter = BooleanToStringConverter.class)
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean isActive = true;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
@@ -48,13 +46,10 @@ public class User {
     private Position position;
 
     @Column(name = "create_date")
-    private LocalDateTime createDate;
-
-    // Date
-    // LocalDate, LocalTime, LocalDateTime
+    private LocalDateTime createDate = LocalDateTime.now();
 
     @Column(name = "last_update_date")
-    private LocalDateTime lastUpdateDate;
+    private LocalDateTime lastUpdateDate = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")

@@ -1,6 +1,6 @@
 package kz.f12.school.ems.web;
 
-import org.hibernate.exception.ConstraintViolationException;
+import kz.f12.school.ems.exception.DeleteUsedRecordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,8 +24,8 @@ public class ErrorHandler {
                 .body("ArrayIndexOutOfBoundsException");
     }
 
-    @ExceptionHandler(value = ConstraintViolationException.class)
-    public ResponseEntity<?> handler(ConstraintViolationException exception) {
+    @ExceptionHandler(value = DeleteUsedRecordException.class)
+    public ResponseEntity<?> handler(DeleteUsedRecordException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorType.DELETE_USED_RECORD);
     }

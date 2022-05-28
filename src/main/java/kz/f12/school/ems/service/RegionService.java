@@ -1,9 +1,11 @@
 package kz.f12.school.ems.service;
 
+import kz.f12.school.ems.exception.DeleteUsedRecordException;
 import kz.f12.school.ems.exception.EntityNotFountException;
 import kz.f12.school.ems.model.entity.Region;
 import kz.f12.school.ems.model.repository.RegionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +34,10 @@ public class RegionService {
     }
 
     public void delete(Region region) {
-        regionRepository.delete(region);
+        try {
+            regionRepository.delete(region);
+        } catch (DataIntegrityViolationException e) {
+            throw new DeleteUsedRecordException();
+        }
     }
 }

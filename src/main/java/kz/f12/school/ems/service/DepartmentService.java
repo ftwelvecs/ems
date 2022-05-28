@@ -1,9 +1,11 @@
 package kz.f12.school.ems.service;
 
+import kz.f12.school.ems.exception.DeleteUsedRecordException;
 import kz.f12.school.ems.exception.EntityNotFountException;
 import kz.f12.school.ems.model.entity.Department;
 import kz.f12.school.ems.model.repository.DepartmentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +33,10 @@ public class DepartmentService {
     }
 
     public void delete(Department department) {
-        departmentRepository.delete(department);
+        try {
+            departmentRepository.delete(department);
+        } catch (DataIntegrityViolationException e) {
+            throw new DeleteUsedRecordException();
+        }
     }
 }
